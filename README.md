@@ -1,24 +1,5 @@
-# pumpingstation
+В корневой папке
 
-## Project setup
-```
-npm install
-```
+docker build . -t <username>/pumpingstation_front
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+docker run -p 8082:8080 <username>/pumpingstation_front
