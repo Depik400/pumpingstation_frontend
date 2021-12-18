@@ -1,5 +1,6 @@
 <template>
   <div class="tariffs">
+    <div :style="successWindow?{filter:'blur(4px)'}:{}">
     <graph ref="graph"/>
     <div class="price_input">
       <select name="" id="select" class="month" @change="updateIndex">
@@ -18,7 +19,12 @@
       </select>
       <input type="number" v-model="currentPrice" @keyup.enter="updatePrice">
     </div>
+    </div>
     <input type="button" class="sumbit_btn" @click="sendNewPriceToServer" value="Подвердить изменения">
+    <div class="success_window" v-if="successWindow">
+      <p>Вы успешно обновили цены</p>
+      <input type="button" value="Закрыть" @click="successWindow = false">
+    </div>
   </div>
 </template>
 
@@ -36,7 +42,8 @@ export default {
       currentPrice: 0,
       currentIndex: 0,
       check: true,
-      price: []
+      price: [],
+      successWindow: false
     }
   },
   mounted() {
@@ -75,17 +82,18 @@ export default {
 
 
     sendNewPriceToServer: function () {
+      let data = new FormData();
       let updatedGraph = this.price.map(item => {
         return {month: item.index, price: item.price};
       });
-      let data = new FormData();
       data.append('price_pair', JSON.stringify(updatedGraph));
+
       this.$http.post('/updateCurrentPricePair', data, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       }).then(() => {
-        //console.log(result.data);
+          this.successWindow = true;
       })
     }
 
@@ -136,6 +144,11 @@ input[type=button] {
   color: #e2e8f0;
   border: none;
   padding: 10px 30px;
+  transition: all 0.2s ease;
+}
+
+input[type=button]:hover {
+  font-size: 22px;
 }
 
 input[type="number"] {
@@ -156,5 +169,20 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.success_window{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: white;
+  border: 2px solid #42b983;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.success_window > p{
+  font-size: 18px;
 }
 </style>

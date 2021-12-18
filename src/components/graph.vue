@@ -60,7 +60,7 @@ export default {
     }
     if (this.state == 'auto') {
       this.priceArray.reverse();
-      this.generatemonthPricePair();
+      this.generateMonthPricePair();
       this.autoFill();
       this.autoInterval = setInterval(() => {
         this.canvasRecreate();
@@ -84,7 +84,7 @@ export default {
     canvasRecreate: function () {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.setupGraph();
-      this.generatemonthPricePair();
+      this.generateMonthPricePair();
       this.autoFill(10);
     },
 
@@ -162,7 +162,7 @@ export default {
       }
     },
 
-    generatemonthPricePair: function () {
+    generateMonthPricePair: function () {
       this.monthPricePair.splice(0, this.monthPricePair.length);
       this.monthArray.forEach((month, index) => {
         let randomIndex = Math.floor(Math.random() * this.priceArray.length);

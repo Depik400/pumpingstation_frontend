@@ -83,11 +83,12 @@ export default {
       let currentMonth = currentDate.getMonth() + 1;
       let currentYear = currentDate.getFullYear();
       this.monthArray.splice(currentMonth, 12 - currentMonth);
+
+      this.currentYear = currentYear;
+      this.currentMonth = this.monthArray[currentMonth - 1];
       for (let i = this.startMonth; i <= currentYear; i++) {
         this.yearArray.push(i);
       }
-      this.currentYear = currentYear;
-      this.currentMonth = this.monthArray[currentMonth - 1];
     }
   },
   watch: {
@@ -181,6 +182,11 @@ input[type=button] {
   color: #e2e8f0;
   border: none;
   padding: 10px 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type=button]:hover {
+  font-size: 22px;
 }
 
 th {

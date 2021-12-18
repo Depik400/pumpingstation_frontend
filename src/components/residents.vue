@@ -164,6 +164,11 @@ input[type=button] {
   color: #e2e8f0;
   border: none;
   padding: 10px 30px;
+  transition: all 0.2s ease;
+}
+
+input[type=button]:hover {
+  font-size: 22px;
 }
 
 .table_container {
