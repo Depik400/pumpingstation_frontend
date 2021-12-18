@@ -1,24 +1,11 @@
-# pumpingstation
+В корневой папке
 
-## Project setup
-```
-npm install
-```
+docker build . -t <username>/pumpingstation_front
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+docker run -p 8082:8080 <username>/pumpingstation_front
+  
+Тестовый владелец 
+  логин: 123
+  пароль: 123
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Для редактирования резидентов используется двойное нажатие на строку с необходимым резидентом во вкладке "Резиденты"
